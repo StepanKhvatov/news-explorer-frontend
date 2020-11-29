@@ -1,0 +1,43 @@
+@import "../styles/mixins.scss";
+
+.saved-news-header__title {
+  @include setFont("Roboto", 400, 18px, 24px);
+  color: rgba(26, 27, 34, 0.5);
+  margin-top: 0;
+}
+
+.saved-news-header__subtitle {
+  @include setFont("Roboto Slab", 400, 40px, 46px);
+  color: #1A1B22;
+  max-width: 530px;
+}
+
+.saved-news-header__keywords {
+  @include setFont("Roboto", 400, 18px, 24px);
+  color: #1A1B22;
+  margin-bottom: 0;
+}
+
+.save-news-header__keywords_strong {
+  @include setFont("Roboto", 700, 18px, 24px);
+}
+
+@media screen and (max-width: 800px) {
+  .saved-news-header__keywords {
+    @include setFont("Roboto", 400, 14px, 24px);
+  }
+
+  .save-news-header__keywords_strong {
+    @include setFont("Roboto", 700, 14px, 24px);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .saved-news-header__keywords {
+    @include setFont("Roboto", 400, 18px, 24px);
+  }
+
+  .save-news-header__keywords_strong {
+    @include setFont("Roboto", 700, 18px, 24px);
+  }
+}

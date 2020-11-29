@@ -1,0 +1,66 @@
+@import "../styles/mixins.scss";
+
+.navigation-mobile__button {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  background-size: cover;
+  border: none;
+  z-index: 3;
+  background-image: url('../images/icons/menu-mobile-icon-white.svg');
+}
+
+.navigation-mobile__button_color-black {
+  background-image: url('../images/icons/menu-mobile-icon-black.svg');
+}
+
+.navigation-mobile__button:hover {
+  cursor: pointer;
+}
+
+.navigation-mobile__container {
+  position: fixed;
+  z-index: 6;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 286px;
+  background: #1A1B22;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.navigation-mobile__container:hover {
+  cursor: default;
+}
+
+.navigation-mobile__button-close {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  background-size: cover;
+  border: none;
+  z-index: 6;
+  background-image: url('../images/icons/menu-mobile-icon-close.svg');
+}
+
+.navigation-mobile__button-close:hover {
+  cursor: pointer;
+}
+
+.navigation-mobile__links {
+  list-style-type: none;
+  padding-left: 40px;
+}
+
+.navigation-mobile__link {
+  @include setFont("Roboto", 500, 18px, 56px);
+  color: white;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 500px) {
+  .navigation-mobile__links {
+    padding: 0 16px 0 16px;
+  }
+}

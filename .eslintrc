@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "extends": "airbnb-base",
   "rules": {
     "no-underscore-dangle": "off",
@@ -8,9 +9,17 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "max-len": "off",
-    "no-nested-ternary": "off",
-    "no-plusplus": "off",
-    "no-shadow": "off",
-    "arrow-body-style": "off"
-  }
+    "no-nested-ternary": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jasmine": true
+  },
+  "plugins": [
+    "react"
+  ]
 }

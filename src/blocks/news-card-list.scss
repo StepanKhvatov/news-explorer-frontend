@@ -1,0 +1,72 @@
+@import "../styles/mixins.scss";
+
+.news-card-list {
+  justify-content: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 400px);
+  grid-template-rows: auto;
+  grid-gap: 16px;
+}
+
+.news-card-list__show-more-button {
+  @include setFont("Roboto", 500, 18px, 24px);
+  padding: 0;
+  width: 288px;
+  height: 64px;
+  background: #FFFFFF;
+  border-radius: 80px;
+  margin-top: 56px;
+  border: none;
+}
+
+.news-card-list__title {
+  @include setFont("Roboto Slab", 400, 40px, 46px);
+  width: 100%;
+  color: #1A1B22;
+  grid-column-start: 1;
+  grid-column-end: -1;
+  margin: 0;
+  margin-bottom: 64px;
+}
+
+.news-card-list__show-more-button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 1270px) {
+  .news-card-list {
+    grid-template-columns: repeat(2, 400px);
+    grid-gap: 8px;
+  }
+
+  .news-card-list__title {
+    margin-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .news-card-list {
+    grid-template-columns: repeat(3, 224px);
+    grid-gap: 8px;
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .news-card-list {
+    grid-template-columns: repeat(2, 224px);
+    grid-gap: 8px;
+  }
+
+  .news-card-list__title {
+    margin-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .news-card-list {
+    grid-template-columns: repeat(auto-fill, 288px);
+    grid-gap: 10px;
+  }
+}
