@@ -1,0 +1,207 @@
+@import "../styles/mixins.scss";
+
+.popup {
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  overflow:hidden;
+  position: absolute;;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  z-index: 3;
+  align-items: center;
+  display: flex;
+  visibility: hidden;
+  height: 0;
+  opacity: 0;
+  transition: height 0ms 400ms, opacity 200ms 0ms, visibility 0.2s linear;
+}
+
+.popup_opened {
+  height: 100vh;
+  visibility: visible;
+  opacity: 1;
+  position: fixed;
+  transition: height 0ms 0ms, opacity 200ms 0ms, visibility 0.2s linear;
+}
+
+.popup_opened:hover {
+  cursor: pointer;
+}
+
+.popup__container {
+  border-radius: 16px;
+  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 34px 35px 28px 35px;
+  z-index: 4;
+}
+
+.popup__container:hover {
+  cursor: default;
+}
+
+.popup__form {
+  max-width: 358px;
+  margin: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.popup__container:hover {
+  cursor: default;
+}
+
+.popup__heading {
+  @include setFont("Roboto", 900, 24px, 28px);
+  color:#1A1B22;
+  margin: 0 ;
+  margin-bottom: 25px;
+  max-width: 315px;
+}
+
+.popup__close-button {
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/close-button.svg');
+  background-size: cover;
+  position: absolute;
+  top: -49px;
+  right: -47px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  transition: opacity 0.3s linear;
+}
+
+.popup__close-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.popup__input-name {
+  @include setFont("Inter", 400, 12px, 14px);
+  color: #2F71E5;
+  margin-bottom: 6px;
+}
+
+.popup__input {
+  @include setFont("Inter", 400, 14px, 17px);
+  color: #000000;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  height: 27px;
+  text-overflow: ellipsis;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 3px;
+}
+
+.popup__error {
+  @include setFont("Inter", 400, 12px, 15px);
+  height: 14px;
+  color: #FF0000;
+  margin-bottom: 13px;
+}
+
+.popup__attention {
+  @include setFont("Inter", 400, 12px, 15px);
+  text-align: center;
+  height: 14px;
+  color: #FF0000;
+  margin: 0;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.popup__choise {
+  @include setFont("Inter", 400, 14px, 17px);
+  color: #000000;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.popup__link {
+  @include setFont("Inter", 500, 14px, 17px);
+  text-decoration: none;
+  color: #2F71E5;
+}
+
+.popup__submit-button {
+  @include setFont("Roboto", 500, 18px, 24px);
+  width: 360px;
+  border: none;
+  background: #2F71E5;
+  color: white;
+  border-radius: 100px;
+  padding: 20px 0 20px 0;
+  transition: background-color 0.1s linear;
+}
+
+.popup__submit-button_disabled {
+  background: #E6E8EB;
+  color: #B6BCBF;
+}
+
+.popup__submit-button_disabled:hover {
+  cursor: default;
+  opacity: 1;
+}
+
+.popup__submit-button:hover {
+  cursor: pointer;
+  background-color: #347EFF;
+}
+
+.popup__submit-button:active {
+  cursor: pointer;
+  background: #2A65CC;
+}
+
+@media screen and (max-width: 550px) {
+  .popup__container {
+    width: 100%;
+    margin-top: auto;
+    height: calc(100% - 85px);
+    justify-content: flex-start;
+    padding: 16px 16px 0 16px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .popup__container-message {
+    width: auto;
+    height: auto;
+    border-radius: 16px;
+    padding: 34px 35px 28px 35px;
+    position: absolute;
+    margin: auto;
+    margin: 0 16px 0 16px;
+  }
+
+  .popup__form {
+    width: 100%;
+  }
+
+  .popup__submit-button {
+    width: 100%;
+  }
+
+  .popup__heading {
+    margin-bottom: 22px;
+  }
+
+  .popup__close-button {
+    width: 24px;
+    height: 24px;
+    right: 16px;
+  }
+}

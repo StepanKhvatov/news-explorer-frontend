@@ -1,0 +1,49 @@
+@import "../styles/mixins.scss";
+
+.header {
+  height: 80px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+  padding: 0 104px 0 104px;
+}
+
+.header_location-popup {
+  position: relative;
+}
+
+.header_color-black {
+  background-color: white;
+  z-index: 3;
+  position: sticky;
+  box-shadow: inset 0px -1px 0px rgba(8, 29, 45, 0.3);
+}
+
+.header__logo {
+  @include setFont("Roboto Slab", 700, 20px, 24px);
+  text-decoration: none;
+  color: white;
+}
+
+.header__logo_color-black {
+  color: #1A1B22;
+}
+
+@media screen and (max-width: 1030px) {
+  .header {
+    height: 66px;
+    padding: 0 40px 0 40px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    padding: 0 16px 0 16px;
+  }
+}

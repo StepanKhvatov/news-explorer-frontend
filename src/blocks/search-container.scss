@@ -1,0 +1,36 @@
+@import "../styles/mixins.scss";
+
+.search-container {
+  max-width: 608px;
+}
+
+.search-container__title {
+  @include setFont("Roboto Slab", 400, 60px, 64px);
+  margin: 0;
+  color: white;
+  margin-bottom: 32px;
+}
+
+.search-container__subtitle {
+  @include setFont("Roboto", 400, 18px, 24px);
+  margin: 0;
+  color: white;
+  margin-bottom: 64px;
+}
+
+@media screen and (max-width: 1030px) {
+  .search-container {
+    max-width: 448px;
+  }
+
+  .search-container__title {
+    font-size: 36px;
+    line-height: 40px;
+    max-width: 385px;
+    margin-bottom: 16px;
+  }
+
+  .search-container__subtitle {
+    margin-bottom: 48px;
+  }
+}
