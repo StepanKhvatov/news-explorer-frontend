@@ -1,8 +1,9 @@
 import React from 'react';
 import AuthForm from './AuthForm';
 import PopupWithMessage from './PopupWithMessage';
+import PopupWithError from './PopupWithError';
 
-const PopupWithForm = ({ isOpen, activeForm, changeForm, onClose, handleLogin }) => {
+const PopupWithForm = ({ isOpen, activeForm, changeForm, onClose, handleLogin, handleRegister, authError, setPopupOpen }) => {
   const overlayRef = React.useRef();
 
   const handleClose = (evt) => {
@@ -27,24 +28,34 @@ const PopupWithForm = ({ isOpen, activeForm, changeForm, onClose, handleLogin })
         {
           activeForm === 'login'
             ? <AuthForm
-              name="Вход"
+              title="Вход"
+              formName="login"
               onSubmit={handleLogin}
               onClose={onClose}
               changeForm={changeForm}
+              authError={authError}
+              setPopupOpen={setPopupOpen}
             />
             : activeForm === 'register'
               ? <AuthForm
-                name="Регистрация"
-                onSubmit={handleLogin}
+                title="Регистрация"
+                formName="register"
+                onSubmit={handleRegister}
                 onClose={onClose}
                 changeForm={changeForm}
+                authError={authError}
+                setPopupOpen={setPopupOpen}
               />
               : activeForm === 'message'
                 ? <PopupWithMessage
                   onClose={onClose}
                   changeForm={changeForm}
                 />
-                : ''
+                : activeForm === 'error'
+                  ? <PopupWithError
+                    onClose={onClose}
+                  />
+                  : ''
         }
       </div>
     </div>

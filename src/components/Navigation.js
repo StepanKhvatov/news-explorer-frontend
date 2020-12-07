@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../blocks/navigation.scss';
 
-const Navigation = ({ currentPath, setPopupOpen }) => {
+const Navigation = ({ currentPath, setPopupOpen, loggedIn, handleLogout, currentUser }) => {
   const navigationLinkClassName = (
     `${(currentPath === '/') ? 'navigation__link' : 'navigation__link navigation__link_color-black'}`
   );
@@ -23,23 +23,42 @@ const Navigation = ({ currentPath, setPopupOpen }) => {
         activeClassName="navigation__link_active-white">
         Главная
       </NavLink>
-      <NavLink
-        className={navigationLinkClassName}
-        exact to="/saved-news"
-        activeClassName="navigation__link_active-black">
-        Сохранённые статьи
-      </NavLink>
-      <button
-        className={navigationButtonClassName}
-        onClick={setPopupOpen}
-        aria-label="Авторизоваться"
-        >
-        Авторизоваться
-      </button>
-      <button className={navigationButtonClassName}>
-        Гретта
-        <img src={logoutIconSource} className="navigation__signin-icon" alt="Иконка авторизации" />
-      </button>
+      {
+        loggedIn
+          ? (
+            <NavLink
+              className={navigationLinkClassName}
+              exact to="/saved-news"
+              activeClassName="navigation__link_active-black">
+              Сохранённые статьи
+            </NavLink>
+          ) : (
+            ''
+          )
+      }
+
+      {
+        (!loggedIn)
+          ? (
+            <button
+              className={navigationButtonClassName}
+              onClick={setPopupOpen}
+              aria-label="Авторизоваться"
+            >
+              Авторизоваться
+            </button>
+          ) : ''
+      }
+      {
+        (loggedIn)
+          ? (
+            <button onClick={handleLogout} className={navigationButtonClassName}>
+              {currentUser.name}
+              <img src={logoutIconSource} className="navigation__signin-icon" alt="Иконка авторизации" />
+            </button>
+          ) : ''
+      }
+
     </nav >
   );
 };

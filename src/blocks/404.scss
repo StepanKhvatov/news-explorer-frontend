@@ -1,0 +1,12 @@
+@import "../styles/mixins.scss";
+
+.not-found__title {
+  @include setFont("Roboto Slab", 400, 40px, 46px);
+}
+
+.not-found__section {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

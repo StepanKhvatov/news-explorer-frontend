@@ -2,7 +2,7 @@ import React from 'react';
 import NavigationPopup from './NavigationPopup';
 import '../blocks/navigation-mobile.scss';
 
-const NavigationMobile = ({ currentPath, openAuth, popupOpen }) => {
+const NavigationMobile = ({ currentPath, openAuth, popupOpen, loggedIn, handleLogout }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   const menuButtonClassName = (
@@ -18,7 +18,10 @@ const NavigationMobile = ({ currentPath, openAuth, popupOpen }) => {
         onClick={() => setMenuOpen(!menuOpen)}
         closePopup={() => setMenuOpen(!menuOpen)}
         menuOpen={menuOpen}
-        openAuth={openAuth} />
+        openAuth={openAuth}
+        loggedIn={loggedIn}
+        handleLogout={handleLogout}
+      />
     </>
   );
 };

@@ -1,16 +1,24 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import '../blocks/navigation-mobile.scss';
 import '../blocks/popup.scss';
 
-const NavigationPopup = ({ menuOpen, onClick, closePopup, openAuth }) => {
+const NavigationPopup = ({ menuOpen, onClick, closePopup, openAuth, loggedIn, handleLogout }) => {
+  const currentUser = React.useContext(CurrentUserContext);
+
   const popupClassName = (
     `${(menuOpen) ? 'popup popup_opened' : 'popup'}`
   );
 
-  const handleButtonClick = () => {
+  const handleLogin = () => {
     closePopup();
     openAuth();
+  };
+
+  const handleLogoutButton = () => {
+    closePopup();
+    handleLogout();
   };
 
   return (
@@ -36,22 +44,42 @@ const NavigationPopup = ({ menuOpen, onClick, closePopup, openAuth }) => {
               Главная
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              onClick={closePopup}
-              className="navigation-mobile__link"
-              exact to="/saved-news">
-              Сохранённые статьи
-            </NavLink>
-          </li>
+          {
+            loggedIn
+              ? (
+                <li>
+                  <NavLink
+                    onClick={closePopup}
+                    className="navigation-mobile__link"
+                    exact to="/saved-news">
+                    Сохранённые статьи
+                  </NavLink>
+                </li>
+              ) : (
+                ''
+              )
+          }
         </ul>
-        <button
-          onClick={() => handleButtonClick()}
-          className="navigation__button navigation__button_location-popup"
-          aria-label="Авторизоваться"
-          >
-          Авторизоваться
-        </button>
+        {
+          loggedIn
+            ? (
+              <button
+                onClick={() => handleLogoutButton()}
+                className="navigation__button navigation__button_location-popup"
+                aria-label="Авторизоваться"
+              >
+                {currentUser.name}
+              </button>
+            ) : (
+              <button
+                onClick={() => handleLogin()}
+                className="navigation__button navigation__button_location-popup"
+                aria-label="Авторизоваться"
+              >
+                Авторизоваться
+              </button>
+            )
+        }
       </div>
     </div>
   );

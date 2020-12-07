@@ -1,58 +1,81 @@
-const cards = [
-  {
-    id: 1,
-    image: '../cards/card-1.jpg',
-    keyword: 'Природа',
-    date: '2 августа, 2019',
-    title: 'Национальное достояние – парки',
-    text: 'В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.',
-    source: 'Лента.ру',
-  },
-  {
-    id: 2,
-    image: '../cards/card-2.jpg',
-    keyword: 'Фотография',
-    date: '2 августа, 2019',
-    title: 'Лесные огоньки: история одной фотографии',
-    text: 'Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного из местных чудес природы.',
-    source: 'Медуза',
-  },
-  {
-    id: 3,
-    image: '../cards/card-3.jpg',
-    keyword: 'Природа',
-    date: '2 августа, 2019',
-    title: '«Первозданная тайга»: новый фотопроект Игоря Шпиленка',
-    text: 'Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...',
-    source: 'Риа',
-  },
-  {
-    id: 4,
-    image: '../cards/card-4.jpg',
-    keyword: 'Природа',
-    date: '2 августа, 2019',
-    title: 'Национальное достояние – парки',
-    text: 'В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.',
-    source: 'Дзен',
-  },
-  {
-    id: 5,
-    image: '../cards/card-5.jpg',
-    keyword: 'Природа',
-    date: '2 августа, 2019',
-    title: 'Лесные огоньки: история одной фотографии',
-    text: 'Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного из местных чудес природы.',
-    source: 'Афиша',
-  },
-  {
-    id: 6,
-    image: '../cards/card-6.jpg',
-    keyword: 'Природа',
-    date: '2 августа, 2019',
-    title: '«Первозданная тайга»: новый фотопроект Игоря Шпиленка',
-    text: 'Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где...',
-    source: 'Медиазона',
-  },
-];
+export function checkMonth(number) {
+  let month = null;
+  if (number === 0) {
+    month = 'Января';
+  } else if (number === 1) {
+    month = 'Февраля';
+  } else if (number === 2) {
+    month = 'Марта';
+  } else if (number === 3) {
+    month = 'Апреля';
+  } else if (number === 4) {
+    month = 'Мая';
+  } else if (number === 5) {
+    month = 'Июня';
+  } else if (number === 6) {
+    month = 'Июля';
+  } else if (number === 7) {
+    month = 'Августа';
+  } else if (number === 8) {
+    month = 'Сентября';
+  } else if (number === 9) {
+    month = 'Октября';
+  } else if (number === 10) {
+    month = 'Ноября';
+  } else if (number === 11) {
+    month = 'Декабря';
+  }
 
-export default cards;
+  return month;
+};
+
+export function uniq(array) {
+  return array.reduce((acc, current) => {
+    current = current.trim();
+    if (!acc.includes(current)) {
+      acc.push(current);
+    }
+    return acc;
+  }, []);
+};
+
+export function getTime() {
+  const date = new Date(Date.now());
+  const pastDate = new Date(Date.now() - 86400000 * 3);
+  const year = date.getFullYear();
+  const pastYear = pastDate.getFullYear();
+  let month = date.getMonth();
+  let pastMonth = pastDate.getMonth();
+  let day = date.getDate();
+  let pastDay = pastDate.getDate();
+  month = month + 1;
+  pastMonth = pastMonth + 1;
+
+  if (day < 10) {
+    day = `0${day}`;
+  }
+
+  if (pastDay < 10) {
+    pastDay = `0${pastDay}`;
+  }
+
+  if (month < 10) {
+    month = `0${month}`
+  }
+
+  if (pastMonth < 10) {
+    pastMonth = `0${pastMonth}`
+  }
+
+  console.log(year);
+  console.log(pastMonth);
+
+  return {
+    day: day,
+    pastDay: pastDay,
+    month: month,
+    pastMonth: pastMonth,
+    year: year,
+    pastYear: pastYear,
+  }
+}

@@ -1,10 +1,91 @@
 import { Link } from 'react-router-dom';
+import { useRef, useState } from 'react';
 
-const AuthForm = ({ onSubmit, onClose, changeForm, name }) => (
+const AuthForm = ({ onSubmit, onClose, changeForm, formName, title, authError }) => {
+  const [disabled, setDisabled] = useState(true);
+  const [errors, setErrors] = useState({});
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const submitButtonClassName = (
+    `${disabled ? 'popup__submit-button popup__submit-button_disabled' : 'popup__submit-button'}`
+  );
+
+  const emailErrorClassName = (
+    `${(!errors.email) ? 'popup__error' : 'popup__error popup__error_active'}`
+  );
+
+  const passwordErrorClassName = (
+    `${(!errors.password) ? 'popup__error' : 'popup__error popup__error_active'}`
+  );
+
+  const nameErrorClassName = (
+    `${(!errors.name) ? 'popup__error' : 'popup__error popup__error_active'}`
+  );
+
+  const authErrorClassName = (
+    `${(authError) ? 'popup__attention popup__attention_active' : 'popup__attention'}`
+  );
+
+  const handleResetForm = () => {
+    setErrors({});
+    if (formName === 'register') {
+      nameRef.current.value = '';
+    }
+    emailRef.current.value = '';
+    passwordRef.current.value = '';
+    setDisabled(true);
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    let data = {};
+    if (formName === 'login') {
+      data = {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      };
+      handleResetForm();
+    } else if (formName === 'register') {
+      data = {
+        name: nameRef.current.value,
+        password: passwordRef.current.value,
+        email: emailRef.current.value,
+      };
+      handleResetForm();
+      changeForm();
+    }
+
+    onSubmit(data);
+  };
+
+  const checkInputValid = (evt) => {
+    if (!evt.target.checkValidity()) {
+      setErrors({ ...errors, [evt.target.name]: true });
+    } else if (evt.target.checkValidity()) {
+      setErrors({ ...errors, [evt.target.name]: false });
+    }
+
+    if (evt.target.value === '') {
+      setErrors({ ...errors, [evt.target.name]: false });
+    }
+  };
+
+  const handleChange = (evt) => {
+    checkInputValid(evt);
+    if (evt.target.closest('form').checkValidity()) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
+
+  return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       className="popup__form"
-      noValidate
+      id="form"
     >
       <button
         className="popup__close-button"
@@ -12,60 +93,76 @@ const AuthForm = ({ onSubmit, onClose, changeForm, name }) => (
         aria-label="Закрыть"
         onClick={onClose}
       />
-      <h3 className="popup__heading">{name}</h3>
+      <h3 className="popup__heading">{title}</h3>
       <span className="popup__input-name">Email</span>
       <input
-        id="input-place"
-        name="name"
+        name="email"
         className="popup__input"
-        type="text"
+        type="email"
         minLength="1"
         maxLength="30"
         required
         placeholder="Введите почту"
+        onChange={(evt) => handleChange(evt)}
+        ref={emailRef}
       />
-      <span className="popup__error">Неправильный формат email</span>
+      <span className={emailErrorClassName}>Неправильный формат email</span>
       <span className="popup__input-name">Пароль</span>
       <input
-        id="input-link"
-        name="link"
+        name="password"
         className="popup__input"
-        type="url"
+        type="password"
         required
+        minLength="4"
+        maxLength="30"
         placeholder="Введите пароль"
+        onChange={(evt) => handleChange(evt)}
+        ref={passwordRef}
       />
-      <span className="popup__error">Пароль слишком короткий</span>
+      <span className={passwordErrorClassName}>Пароль слишком короткий</span>
       {
-        (name === 'Регистрация')
+        (title === 'Регистрация')
           ? <>
             <span className="popup__input-name">Имя</span>
             <input
-              id="input-link"
-              name="link"
+              name="name"
               className="popup__input"
-              type="url"
+              type="text"
               required
+              minLength="4"
+              maxLength="30"
               placeholder="Введите своё имя"
+              onChange={(evt) => handleChange(evt)}
+              ref={nameRef}
             />
-            <span className="popup__error">Имя слишком короткое</span>
+            <span className={nameErrorClassName}>Имя слишком короткое</span>
           </>
           : ''
       }
-      <p className="popup__attention">Такой пользователь уже есть</p>
+      {
+        (title === 'Регистрация')
+          ? <p className={authErrorClassName}>Такой пользователь уже есть</p>
+          : <p className={authErrorClassName}>Неправильно введён email или пароль</p>
+      }
       <button
-        className="popup__submit-button"
+        className={submitButtonClassName}
         aria-label="Создать"
         type="submit"
+        disabled={disabled}
       >
         Войти
       </button>
       <p className="popup__choise">или
        <Link to='/'
           className="popup__link"
-          onClick={() => changeForm()}>{(name === 'Вход') ? ' Зарегестрироваться' : ' Войти'}
+          onClick={() => {
+            handleResetForm();
+            changeForm();
+          }}>{(title === 'Вход') ? ' Зарегестрироваться' : ' Войти'}
         </Link>
       </p>
     </form>
-);
+  );
+};
 
 export default AuthForm;

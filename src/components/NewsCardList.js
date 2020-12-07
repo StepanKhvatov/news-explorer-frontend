@@ -1,24 +1,37 @@
 import React from 'react';
-import NewsCard from './NewsCard';
-import cards from '../utils/constants';
 import '../blocks/news-card-list.scss';
 
-const NewsCardList = ({ cardSettings, sectionSettings }) => (
+const NewsCardList = ({
+  sectionSettings,
+  handleShowMore,
+  children,
+}) => (
     <section className="section_results">
       <div className="news-card-list">
         {
-          (sectionSettings.title) ? <h2 className="news-card-list__title">Результаты поиска</h2> // выводим заголовок на главную страницу
-            : ''
+          sectionSettings.title
+            ? (
+              <h2 className="news-card-list__title">Результаты поиска</h2>
+            ) : (
+              ''
+            )
         }
         {
-          cards.map((card) => <NewsCard key={card.id} card={card} cardSettings={cardSettings} />)
+          children
         }
       </div>
       {
-        (sectionSettings.showMoreButton) ? <button className="news-card-list__show-more-button">Показать ещё</button> // выводим кнопку "показать ещё"
-          : ''
+        sectionSettings.showMoreButton
+          ? (
+            <button
+              onClick={handleShowMore}
+              className="news-card-list__show-more-button">
+              Показать ещё
+            </button>
+          ) : (
+            ''
+          )
       }
-
     </section>
 );
 

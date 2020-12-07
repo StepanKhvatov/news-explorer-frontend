@@ -9,7 +9,13 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "max-len": "off",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "class-methods-use-this": "off",
+    "import/named": "off",
+    "array-callback-return": "off",
+    "arrow-body-style": "off",
+    "no-param-reassign": "off",
+    "consistent-return": "off",
   },
   "parserOptions": {
     "ecmaVersion": 2018

@@ -10,7 +10,7 @@
   right: 0;
   bottom: 0;
   justify-content: center;
-  z-index: 3;
+  z-index: 30;
   align-items: center;
   display: flex;
   visibility: hidden;
@@ -111,6 +111,12 @@
   height: 14px;
   color: #FF0000;
   margin-bottom: 13px;
+  visibility: hidden;
+  transition: visibility  ease-in;
+}
+
+.popup__error_active {
+  visibility: visible;
 }
 
 .popup__attention {
@@ -121,6 +127,12 @@
   margin: 0;
   margin-top: 15px;
   margin-bottom: 8px;
+  visibility: hidden;
+  transition: visibility 0.2s ease-in;
+}
+
+.popup__attention_active {
+  visibility: visible;
 }
 
 .popup__choise {
@@ -150,6 +162,7 @@
 .popup__submit-button_disabled {
   background: #E6E8EB;
   color: #B6BCBF;
+  pointer-events: none;
 }
 
 .popup__submit-button_disabled:hover {
